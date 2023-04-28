@@ -9,9 +9,8 @@ services:
     volumes:
       - pg-data:/postgresql/data
     environment:
-      POSTGRES_USER: api-app-user
-      POSTGRES_PASSWORD: WhatIsAp1P4ssw0rd
-      POSTGRES_DB: api-base
-
+      POSTGRES_USER: NewAppUser
+      POSTGRES_PASSWORD: NewPassword
+      POSTGRES_DB: apibase
 volumes:
   pg-data:
