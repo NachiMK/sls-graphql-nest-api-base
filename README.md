@@ -12,6 +12,8 @@ This is an attempt to create a sample project that has following capabilities.
 
 ## Installation
 
+This was built using Node 18.x, Serverles framework 3.0. So please make sure you have those setup.
+
 ```bash
 npm install
 ```
@@ -40,6 +42,11 @@ IS_OFFLINE=TRUE
 ```
 
 Make sure you run primsa migrations to create tables/populate the tables. You have to manually create the database. No script included for it.
+
+```bash
+# run npx generate
+npx prisma generate
+```
 
 ### Running the app
 ```bash
@@ -81,6 +88,20 @@ $ npm run test:e2e
 
 # test coverage
 $ npm run test:cov
+```
+
+### Testing from your browser
+After starting SLS locally go to  http://localhost:3001/dev/graphql and test GraphQL calls.
+
+```gql
+query
+{
+  books
+  {
+    id
+    title
+  }
+}# Write your query or mutation here
 ```
 
 ## GraphQL Schema changes
