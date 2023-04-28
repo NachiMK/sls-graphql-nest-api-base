@@ -12,6 +12,5 @@ services:
       POSTGRES_USER: NewAppUser
       POSTGRES_PASSWORD: NewPassword
       POSTGRES_DB: apibase
-
 volumes:
   pg-data:
