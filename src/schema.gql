@@ -1,0 +1,38 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Book {
+  id: ID!
+  title: String!
+}
+
+input CreateUserInput {
+  email: String!
+  name: String!
+  password: String!
+}
+
+type Mutation {
+  createUser(data: CreateUserInput!): User!
+}
+
+type Query {
+  books: [Book!]!
+  users: [User!]!
+}
+
+"""
+`Date` type as integer. Type represents date and time as number of milliseconds from start of UNIX epoch.
+"""
+scalar Timestamp
+
+type User {
+  createdAt: Timestamp!
+  email: String!
+  id: ID!
+  isActive: Boolean!
+  name: String!
+  password: String!
+  updatedAt: Timestamp!
+}
