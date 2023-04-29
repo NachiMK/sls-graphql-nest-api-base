@@ -121,3 +121,18 @@ Some things are not working.
 - Original Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
 - Git repo - (https://github.com/jeffersondossantosaguiar/graphql-base-api/tree/main)
 
+## Clean Architecture Notes
+clean architecture link:
+
+GraphQL Schema -> Type for callers of API to use
+GraphQL Resolvers -> Query/Mutations
+	- These resolvers (BooksResolver - src/application/resolvers/books.resolver.ts) uses the UseCases to fulfill a resolver request
+	- Use cases (ListAllBooksUseCase is used by GraphQL Query Book Resolver) , UseCase uses BookRepository Interface in src/application/resolvers/books.resolver.ts to fulfill the use case need.
+		- Use case only interacts with a Repository (aka. Interface) it doesn’t know the actual implementer.
+	- Use Case and Resolvers are linked together in the HTTP Module and loaded into App start.
+		- Also Use case receives the implementer in its constructor at run time on the app start. In our case it is the ListModule 
+	    - List Module (src/infra/list/list.module.ts)
+		    - This module basically puts the interface (src/application/repositories/book.repository.ts) and implementer together (src/infra/list/repositories/list-book.repository.ts)
+		    - Implementer might use database or actually Rest API to do further actions.
+	- Entities are just common form on how the data is passed around between various layers.
+	- DTOs are used for clients to pass input parameters or received some return values.
