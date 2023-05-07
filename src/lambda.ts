@@ -26,6 +26,7 @@ async function bootstrap() {
 }
 
 export const handler = async (event: any, context: Context, callback: any) => {
+
   const server = await bootstrap();
 
   if (event.source === 'serverless-plugin-warmup') {

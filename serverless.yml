@@ -37,6 +37,7 @@ provider:
 
 functions:
   main:
+    #handler: src/index.graphqlHandler
     handler: src/lambda.handler
     ssmToEnvironment:
       - DATABASE_URL
@@ -52,6 +53,27 @@ functions:
       - http:
           method: ANY
           path: '{proxy+}'
+    package:
+      # see https://github.com/serverless/serverless-plugin-typescript/issues/170#issuecomment-1132731263
+      patterns:
+        - '!node_modules/.prisma/client/libquery_engine-*'
+        - 'node_modules/.prisma/client/libquery_engine-linux-arm64-*'
+        - '!node_modules/prisma/libquery_engine-*'
+        - '!node_modules/@prisma/engines/**'
+  graph:
+    handler: src/index.graphqlHandler
+    #handler: src/lambda.handler
+    ssmToEnvironment:
+      - DATABASE_URL
+      - APOLLO_KEY
+    environment:
+      NODE_ENV: production
+      # https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/node-reusing-connections.html
+      AWS_NODEJS_CONNECTION_REUSE_ENABLED: 1
+    events:
+      - http:
+          method: ANY
+          path: /gql
     package:
       # see https://github.com/serverless/serverless-plugin-typescript/issues/170#issuecomment-1132731263
       patterns:
